@@ -1,43 +1,104 @@
 # CAR-RENTAL-SYSTEM
 
 
-## 1. Introduction
 
-The Car Rental System is a simple console-based application developed using the C programming language. It is used to manage car records and rental operations efficiently.
+##  Project Overview
 
-## 2. Objectives of the Project
+The Car Rental System is a simple console-based application developed using C++ programming language. This system allows users to manage car rental operations such as adding cars, viewing available cars, renting cars, and returning cars.
 
-* To manage car details
-* To track car availability
-* To perform rental and return operations
-* To calculate total rent
+The project is designed using Object-Oriented Programming (OOP) concepts to ensure better structure, modularity, and data security.
 
-## 3. Methodology / System Design
+---
 
-The system is menu-driven and uses structures and arrays. Each car has attributes like ID, name, rent per day, and status (available or rented).
+##  Objectives
 
-The system performs the following operations:
+* To implement a real-world car rental system
+* To understand and apply OOP concepts in C++
+* To manage car records efficiently
+* To provide a simple user interface using console
 
-* Add Car
-* View Cars
-* Rent Car
-* Return Car
+---
 
-## 4. Implementation / Source Code
+##  OOP Concepts Used
 
-The project is implemented using C programming language. It uses:
+### 1. Class and Object
 
-* Structures to store car details
-* Arrays to manage multiple records
-* Functions for different operations
+* A class `Car` is created to represent car details.
+* Objects of the class are used to store multiple car records.
 
-Main functionalities include:
+### 2. Encapsulation
 
-* Adding new cars
-* Viewing available cars
-* Renting a car
-* Returning a car
+* Data members like `id`, `name`, `rent`, and `status` are declared as private.
+* Access to data is controlled using public member functions.
 
-## 5. Conclusion
+### 3. Abstraction
 
-The Car Rental System is a simple and effective application for managing car rental operations. It helps in tracking car availability and calculating rental costs efficiently.
+* User interacts only with functions like `addCar()`, `rentCar()`, etc.
+* Internal details are hidden.
+
+---
+
+##  Features
+
+* Add new cars
+* View all cars
+* Rent a car
+* Return a car
+* Check availability status
+
+---
+
+##  System Design
+
+### Class: Car
+
+Attributes:
+
+* Car ID
+* Car Name
+* Rent per Day
+* Status (Available / Rented)
+
+Functions:
+
+* addCar()
+* showCar()
+* rentCar()
+* returnCar()
+* getId()
+* getStatus()
+
+
+
+
+##  Advantages
+
+* Simple and easy to use
+* Demonstrates OOP concepts clearly
+* Suitable for beginners and students
+
+---
+
+##  Limitations
+
+* Data is not stored permanently (no file handling)
+* No advanced features like login or database
+* Limited to console interface
+
+---
+
+##  Future Improvements
+
+* Add file handling for data storage
+* Implement user authentication
+* Create GUI interface
+* Add payment system
+
+---
+
+##  Conclusion
+
+The Car Rental System project is a basic implementation of OOP concepts in C++. It helps in understanding how real-world systems can be modeled using classes and objects. This project is useful for beginners to learn practical programming skills.
+
+---
+
