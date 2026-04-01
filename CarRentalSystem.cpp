@@ -1,131 +1,149 @@
-#include <stdio.h>
-#include <string.h>
+#include <iostream>
+using namespace std;
 
-struct car {
+class Car {
+private:
     int id;
-    char name[20];
+    string name;
     float rent;
     int status; // 0 = Available, 1 = Rented
+
+public:
+    void addCar() {
+        cout << "\nEnter Car ID: ";
+        cin >> id;
+
+        cout << "Enter Car Name: ";
+        cin >> name;
+
+        cout << "Enter Rent per Day: ";
+        cin >> rent;
+
+        status = 0;
+        cout << "\nCar Added Successfully!\n";
+    }
+
+    void showCar() {
+        cout << "\nID: " << id;
+        cout << "\nName: " << name;
+        cout << "\nRent per Day: " << rent;
+
+        if(status == 0)
+            cout << "\nStatus: Available\n";
+        else
+            cout << "\nStatus: Rented\n";
+    }
+
+    int getId() {
+        return id;
+    }
+
+    int getStatus() {
+        return status;
+    }
+
+    void rentCar() {
+        int days;
+        cout << "Enter number of days: ";
+        cin >> days;
+
+        float total = days * rent;
+        status = 1;
+
+        cout << "\nCar Rented Successfully!\n";
+        cout << "Total Rent = " << total << endl;
+    }
+
+    void returnCar() {
+        status = 0;
+        cout << "\nCar Returned Successfully!\n";
+    }
 };
 
-struct car c[100];
-int count = 0;
-
-// Add Car
-void addCar() {
-    printf("\nEnter Car ID: ");
-    scanf("%d", &c[count].id);
-
-    printf("Enter Car Name: ");
-    scanf("%s", c[count].name);
-
-    printf("Enter Rent per Day: ");
-    scanf("%f", &c[count].rent);
-
-    c[count].status = 0; // Available
-    count++;
-
-    printf("\nCar Added Successfully!\n");
-}
-
-// View Cars
-void viewCars() {
-    if(count == 0) {
-        printf("\nNo Cars Available!\n");
-        return;
-    }
-
-    printf("\n--- Car List ---\n");
-    for(int i = 0; i < count; i++) {
-        printf("\nID: %d", c[i].id);
-        printf("\nName: %s", c[i].name);
-        printf("\nRent per Day: %.2f", c[i].rent);
-
-        if(c[i].status == 0)
-            printf("\nStatus: Available\n");
-        else
-            printf("\nStatus: Rented\n");
-    }
-}
-
-// Rent Car
-void rentCar() {
-    int id, days, found = 0;
-    printf("\nEnter Car ID to Rent: ");
-    scanf("%d", &id);
-
-    for(int i = 0; i < count; i++) {
-        if(c[i].id == id) {
-            found = 1;
-
-            if(c[i].status == 1) {
-                printf("\nCar is already rented!\n");
-                return;
-            }
-
-            printf("Enter number of days: ");
-            scanf("%d", &days);
-
-            float total = days * c[i].rent;
-            c[i].status = 1;
-
-            printf("\nCar Rented Successfully!\n");
-            printf("Total Rent = %.2f\n", total);
-            return;
-        }
-    }
-
-    if(!found)
-        printf("\nCar Not Found!\n");
-}
-
-// Return Car
-void returnCar() {
-    int id, found = 0;
-    printf("\nEnter Car ID to Return: ");
-    scanf("%d", &id);
-
-    for(int i = 0; i < count; i++) {
-        if(c[i].id == id) {
-            found = 1;
-
-            if(c[i].status == 0) {
-                printf("\nCar is already available!\n");
-                return;
-            }
-
-            c[i].status = 0;
-            printf("\nCar Returned Successfully!\n");
-            return;
-        }
-    }
-
-    if(!found)
-        printf("\nCar Not Found!\n");
-}
-
-// Main Menu
 int main() {
+    Car c[100];
+    int count = 0;
     int choice;
 
     while(1) {
-        printf("\n===== Car Rental System =====\n");
-        printf("1. Add Car\n");
-        printf("2. View Cars\n");
-        printf("3. Rent Car\n");
-        printf("4. Return Car\n");
-        printf("5. Exit\n");
+        cout << "\n===== Car Rental System =====\n";
+        cout << "1. Add Car\n";
+        cout << "2. View Cars\n";
+        cout << "3. Rent Car\n";
+        cout << "4. Return Car\n";
+        cout << "5. Exit\n";
 
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+        cout << "Enter your choice: ";
+        cin >> choice;
 
         switch(choice) {
-            case 1: addCar(); break;
-            case 2: viewCars(); break;
-            case 3: rentCar(); break;
-            case 4: returnCar(); break;
-            case 5: printf("\nExiting...\n"); return 0;
-            default: printf("\nInvalid Choice!\n");
+            case 1:
+                c[count].addCar();
+                count++;
+                break;
+
+            case 2:
+                if(count == 0) {
+                    cout << "\nNo Cars Available!\n";
+                } else {
+                    for(int i = 0; i < count; i++) {
+                        c[i].showCar();
+                    }
+                }
+                break;
+
+            case 3: {
+                int id, found = 0;
+                cout << "Enter Car ID: ";
+                cin >> id;
+
+                for(int i = 0; i < count; i++) {
+                    if(c[i].getId() == id) {
+                        found = 1;
+
+                        if(c[i].getStatus() == 1) {
+                            cout << "\nCar already rented!\n";
+                        } else {
+                            c[i].rentCar();
+                        }
+                    }
+                }
+
+                if(!found)
+                    cout << "\nCar Not Found!\n";
+
+                break;
+            }
+
+            case 4: {
+                int id, found = 0;
+                cout << "Enter Car ID: ";
+                cin >> id;
+
+                for(int i = 0; i < count; i++) {
+                    if(c[i].getId() == id) {
+                        found = 1;
+
+                        if(c[i].getStatus() == 0) {
+                            cout << "\nCar already available!\n";
+                        } else {
+                            c[i].returnCar();
+                        }
+                    }
+                }
+
+                if(!found)
+                    cout << "\nCar Not Found!\n";
+
+                break;
+            }
+
+            case 5:
+                cout << "\nExiting...\n";
+                return 0;
+
+            default:
+                cout << "\nInvalid Choice!\n";
         }
     }
 }
